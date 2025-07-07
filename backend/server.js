@@ -18,7 +18,6 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use('/uploads', express.static(require('path').join(__dirname, 'uploads')));
 
-// TODO: Add routes here
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/cart', cartRoutes);
@@ -39,4 +38,4 @@ sequelize.sync().then(async () => {
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
   });
-});
+}); 
