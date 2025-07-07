@@ -1,5 +1,5 @@
 // ====== CONFIG ======
-const API_BASE = 'http://localhost:3000'; // Adjust if deploying separately
+const API_BASE = 'https://adaptnxt-simple-e-commerce-api.onrender.com'; // Updated to deployed backend URL
 const AUTH_KEY = 'ecom_jwt';
 
 // ====== STATE ======
