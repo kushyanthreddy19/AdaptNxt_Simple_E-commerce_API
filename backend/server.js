@@ -8,6 +8,8 @@ const authRoutes = require('./routes/auth');
 const productRoutes = require('./routes/product');
 const cartRoutes = require('./routes/cart');
 const orderRoutes = require('./routes/order');
+const User = require('./models/User');
+const bcrypt = require('bcrypt');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -26,7 +28,14 @@ app.get('/', (req, res) => {
   res.send('Simple E-commerce API is running');
 });
 
-sequelize.sync().then(() => {
+sequelize.sync().then(async () => {
+  // Create default admin if not exists
+  const adminExists = await User.findOne({ where: { role: 'admin' } });
+  if (!adminExists) {
+    const hashedPassword = await bcrypt.hash('admin123', 10);
+    await User.create({ username: 'admin', password: hashedPassword, role: 'admin' });
+    console.log('Default admin user created: username=admin, password=admin123');
+  }
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
   });
