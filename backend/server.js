@@ -32,9 +32,9 @@ sequelize.sync().then(async () => {
   // Create default admin if not exists
   const adminExists = await User.findOne({ where: { role: 'admin' } });
   if (!adminExists) {
-    const hashedPassword = await bcrypt.hash('admin123', 10);
-    await User.create({ username: 'admin', password: hashedPassword, role: 'admin' });
-    console.log('Default admin user created: username=admin, password=admin123');
+    const hashedPassword = await bcrypt.hash('admin10', 10);
+    await User.create({ username: 'admin10', password: hashedPassword, role: 'admin' });
+    console.log('Default admin user created: username=admin10, password=admin10');
   }
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
